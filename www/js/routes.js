@@ -14,6 +14,12 @@ const Routes = (function () {
 
   const findMyRoute = function () {
     if (!navigator.geolocation) {
+      getLocationRoutes({
+        coords: {
+          latitude: '',
+          longitude: ''
+        }
+      });
       return;
     }
     navigator.geolocation.getCurrentPosition(getLocationRoutes, locationError, { timeout: 5000 });
@@ -27,7 +33,7 @@ const Routes = (function () {
     let ajax = $.ajax({
       method: 'GET',
       url: Variables.backendURL + 'route/obtain_routes',
-      data: { latitude: position.coords.latitude, longitude: position.coords.longitude }
+      data: { user_id: app.user.id, latitude: position.coords.latitude, longitude: position.coords.longitude }
     });
     ajax.done(function (data) {
       if (!data || data.length < 1) {
@@ -35,8 +41,10 @@ const Routes = (function () {
       }
       const routesListHtml = data.reduce(function (carry, route) {
         const routeHtml = '<li>' +
+          '<p>Fecha: ' + route.fecha + '</p>' +
+          '<p>Comentario: ' + route.comentario + '</p>' +
           '<a href="detalle-ruta.html?id=' + route.id + '" class="btn">Ver m&aacute;s</a>' +
-          '<button class="btn js-take-route" data-id="' + route.id + '">Tomar ruta</button>' +
+          /* '<button class="btn js-take-route" data-id="' + route.id + '">Tomar ruta</button>' + */
         '</li>';
         return carry + routeHtml;
       }, '');
