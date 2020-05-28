@@ -39,7 +39,7 @@ const Routes = (function () {
       if (!data || data.length < 1) {
         return;
       }
-      const routesListHtml = data.reduce(function (carry, route) {
+      const routesListHtml = data.routes.reduce(function (carry, route) {
         const routeHtml = '<li>' +
           '<p>Fecha: ' + route.fecha + '</p>' +
           '<p>Comentario: ' + route.comentario + '</p>' +
