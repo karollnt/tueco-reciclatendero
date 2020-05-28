@@ -70,11 +70,7 @@ const Routes = (function () {
         '<p><b>Estado</b>: ' + data.details.estado + '</p>' +
         '<p><b>Comentario</b>: ' + data.details.comentario + '</p>' +
         (app.user.id != data.details.id_reciclatendero ? '<button class="btn js-take-route" data-id="' + route.id + '">Tomar ruta</button>' : '');
-         
-      }, '');
       $('.js-route-details').html(routeInfoHtml);
-        });
-  };
         
       const orderListHtml = data.orders.reduce(function (carry, item) {
         const itemHtml = '<li>'+
