@@ -66,13 +66,11 @@ const Routes = (function () {
       if (!data || data.length < 1) {
         return;
        }
-      const routeInfoHtml = data.details.reduce(function (carry, item) {
-        const itemHtml = '<li>'+
-        '<h3>Fecha: ' + item.details.fecha_creacion + '</h3>' +
-        '<p><b>Estado</b>: ' + item.details.estado + '</p>' +
-        '<p><b>Comentario</b>: ' + item.details.comentario + '</p>' +
-        (app.user.id != item.details.id_reciclatendero ? '<button class="btn js-take-route" data-id="' + route.id + '">Tomar ruta</button>' : '');
-         return carry + itemHtml;
+      const routeInfoHtml ='<h3>Fecha: ' + data.details.fecha_creacion + '</h3>' +
+        '<p><b>Estado</b>: ' + data.details.estado + '</p>' +
+        '<p><b>Comentario</b>: ' + data.details.comentario + '</p>' +
+        (app.user.id != data.details.id_reciclatendero ? '<button class="btn js-take-route" data-id="' + route.id + '">Tomar ruta</button>' : '');
+         
       }, '');
       $('.js-route-details').html(routeInfoHtml);
         });
