@@ -93,7 +93,7 @@ const Routes = (function () {
       $('.js-orders-list').html(orderListHtml);
     });
    });
-  });
+ 
 
 
   const getAllUrlParams = function (url) {
