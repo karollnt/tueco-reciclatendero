@@ -65,13 +65,12 @@ const Routes = (function () {
     ajax.done(function (data) {
       if (!data || data.length < 1) {
         return;
-       }
-      const routeInfoHtml ='<h3>Fecha: ' + data.details.fecha_creacion + '</h3>' +
+      }
+      const routeInfoHtml = '<h3>Fecha: ' + data.details.fecha_creacion + '</h3>' +
         '<p><b>Estado</b>: ' + data.details.estado + '</p>' +
         '<p><b>Comentario</b>: ' + data.details.comentario + '</p>' +
         (app.user.id != data.details.id_reciclatendero ? '<button class="btn js-take-route" data-id="' + route.id + '">Tomar ruta</button>' : '');
       $('.js-route-details').html(routeInfoHtml);
-        
       const orderListHtml = data.orders.reduce(function (carry, item) {
         const itemHtml = '<li>'+
           '<p>Fecha para recoger: ' + item.fecha + '</p>' +
