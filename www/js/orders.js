@@ -173,9 +173,13 @@ const Orders = (function () {
         '<div class="col-6">' +
           '<p><b>Fecha recogida</b><br>' + (data.fecha_recogida ? data.fecha_recogida : 'No recogido') + '</p>' +
         '</div>' +
-        '<div class="col-12">' +
-          '<p><b>Nombre cliente</b>: ' + (data.nombre_cliente + ' ' + data.apellido_cliente) + '</p>' +
-        '</div>' +
+        (
+          data.id_perfil == 2 ?
+            '<div class="col-12">' +
+              '<p><b>Nombre cliente</b>: ' + (data.nombre_cliente + ' ' + data.apellido_cliente) + '</p>' +
+            '</div>'
+            :  ''
+        ) +
         '<div class="col-6">' +
           '<p><b>Departamento</b>: ' + data.departamento + '</p>' +
           '<p><b>Ciudad</b>: ' + data.ciudad + '</p>' +
@@ -209,6 +213,32 @@ const Orders = (function () {
         $('.js-order-items').html(detailsHtml);
         $('.js-total-price').html(total);
       });
+      if (data.id_estado_solicitud == 2) {
+        $('.js-set-as-complete')
+          .show()
+          .attr('data-id', params.id)
+          .on('click', setAsCompleted);
+      }
+    });
+  };
+
+  const setAsCompleted = function (ev) {
+    const button = ev.target;
+    const id = button.getAttribute('data-id');
+    let ajax = $.ajax({
+      data: { order_id: id },
+      method: 'POST',
+      url: Variables.backendURL + 'order/set_as_completed'
+    });
+    ajax.done(function (data) {
+      if (data.valid == true) {
+        window.location.reload();
+        return;
+      }
+      alert('No se pudo actualizar, intente m&acute;s tarde');
+    })
+    .fail(function (data) {
+      alert('No se pudo actualizar, intente m&acute;s tarde');
     });
   };
 
