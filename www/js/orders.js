@@ -86,7 +86,7 @@ const Orders = (function () {
     }
     let ajax = $.ajax({
       url: Variables.backendURL + 'order/get_user_orders',
-      data: {user_id: app.user.id},
+      data: { user_id: app.user.id, is_recycler: true},
       method: 'GET'
     });
     ajax.done(function (data) {
