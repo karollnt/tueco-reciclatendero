@@ -13,6 +13,7 @@
   "author": "Tu Eco Team",
   "license": "Apache-2.0",
   "dependencies": {
+    "cordova-android": "^8.1.0",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-geolocation": "^4.0.2"
   },
@@ -25,7 +26,8 @@
       "cordova-plugin-geolocation": {}
     },
     "platforms": [
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }
